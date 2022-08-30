@@ -18,9 +18,9 @@ pub struct PipelineElement {
 }
 
 impl PipelineElement {
-    pub(crate) fn new(name: &str, pipeline: &Pipeline) -> Self {
+    pub(crate) fn new<S: Into<String>>(name: S, pipeline: &Pipeline) -> Self {
         Self {
-            name: name.to_owned(),
+            name: name.into(),
             client: pipeline.client.clone(),
             pipeline: pipeline.clone(),
         }
