@@ -7,7 +7,7 @@ edition = "2021"
 readme = "README.md"
 license-file = "LICENSE.md"
 repository = "https://github.com/InnovateAndBuild/gst-client"
-documentation = "https://docs.rs/git-client"
+documentation = "https://docs.rs/gst-client"
 keywords = ["gstreamer", "gstd", "API", "client"]
 categories = ["web-programming::http-client"]
 
