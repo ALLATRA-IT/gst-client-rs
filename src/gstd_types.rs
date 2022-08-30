@@ -1,4 +1,4 @@
-//! [GStreamer Daemon HTTP][1] API structures.
+//! [`GStreamer Daemon HTTP`][1] API structures.
 //!
 //! [1]: https://developer.ridgerun.com/wiki/index.php/GStreamer_Daemon_-_HTTP_API
 #![allow(unreachable_pub, missing_docs)]
@@ -7,7 +7,7 @@ use derive_more::{Display, Error};
 use serde::{Deserialize, Serialize};
 use serde_repr::{Deserialize_repr, Serialize_repr};
 
-/// Response returned by [GStreamer Daemon][1] API.
+/// Response returned by [`GStreamer Daemon`][1] API.
 ///
 /// [1]: https://developer.ridgerun.com/wiki/index.php/GStreamer_Daemon
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -21,9 +21,9 @@ pub struct Response {
     pub response: ResponseT,
 }
 
-/// Response Codes for [`Response`] of [GStD]
+/// Response Codes for [`Response`] of [`GStD`]
 ///
-/// [GStD]: https://developer.ridgerun.com/wiki/index.php/GStreamer_Daemon
+/// [`GStD`]: https://developer.ridgerun.com/wiki/index.php/GStreamer_Daemon
 #[derive(Serialize_repr, Deserialize_repr, PartialEq, Eq, Debug, Clone, Copy, Error, Display)]
 #[repr(u8)]
 pub enum ResponseCode {
@@ -92,9 +92,9 @@ pub struct Properties {
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Node {
-    /// The name of [GStreamer element]
+    /// The name of [`GStreamer element`]
     ///
-    /// [GStreamer element]: https://gstreamer.freedesktop.org/documentation/
+    /// [`GStreamer element`]: https://gstreamer.freedesktop.org/documentation/
     /// application-development/basics/elements.html
     pub name: String,
 }

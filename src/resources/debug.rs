@@ -1,7 +1,7 @@
 //! Define [`struct@Debug`] which encapsulate methods
-//! of [Debug API][1] for [GStreamer][2]
+//! of [`Debug API`][1] for [`GStreamer`][2]
 //!
-//! Details about [GStreamer Debugging]
+//! Details about [`GStreamer Debugging`]
 //!
 //! [GStreamer]: https://gstreamer.freedesktop.org/
 //! [1]: https://developer.ridgerun.com/wiki/index.php/GStreamer_Daemon_-_C_API#Debug

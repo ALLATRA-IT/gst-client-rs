@@ -1,9 +1,9 @@
 //! Define [`PipelineBus`] which encapsulate methods
-//! of [Bus API][1]
+//! of [`Bus API`][1]
 //!
-//! The actual bus is [GStreamer] [GstBus][2]
+//! The actual bus is [`GStreamer`] [`GstBus`][2]
 //!
-//! [GStreamer]: https://gstreamer.freedesktop.org/
+//! [`GStreamer`]: https://gstreamer.freedesktop.org/
 //! [1]: https://developer.ridgerun.com/wiki/index.php/GStreamer_Daemon_-_C_API#Bus
 //! [2]: https://gstreamer.freedesktop.org/documentation/additional/design/gstbus.html
 use crate::{gstd_types, resources::Pipeline, Error, GstClient};

@@ -1,12 +1,12 @@
 //! Defines [`GstClient`] for communication with
-//! [GStreamer Daemon][1] API.
+//! [`GStreamer Daemon`][1] API.
 //!
 //! [1]: https://developer.ridgerun.com/wiki/index.php/GStreamer_Daemon
 use crate::{gstd_types, resources, Error};
 use reqwest::{Client, Response};
 use url::Url;
 
-/// [`GstClient`] for [GStreamer Daemon][1] API.
+/// [`GstClient`] for [`GStreamer Daemon`][1] API.
 ///
 /// [1]: https://developer.ridgerun.com/wiki/index.php/GStreamer_Daemon
 #[derive(Debug, Clone)]
@@ -16,7 +16,7 @@ pub struct GstClient {
 }
 
 impl GstClient {
-    /// Build [`GstClient`] for future call to [GStreamer Daemon][1] API.
+    /// Build [`GstClient`] for future call to [`GStreamer Daemon`][1] API.
     ///
     /// # Errors
     ///
@@ -89,19 +89,21 @@ impl GstClient {
         let resp = self.get("pipelines").await?;
         self.process_resp(resp).await
     }
-    /// Operate with [GStreamer Daemon][1] pipelines.
+    /// Operate with [`GStreamer Daemon`][1] pipelines.
     ///
     /// # Arguments
     ///
     /// * `name` - name of the pipeline
     ///
     /// [1]: https://developer.ridgerun.com/wiki/index.php/GStreamer_Daemon
+    #[must_use]
     pub fn pipeline(&self, name: &str) -> resources::Pipeline {
         resources::Pipeline::new(name, self)
     }
-    /// Manage [GStreamer Daemon][1] Debug mode.
+    /// Manage [`GStreamer Daemon`][1] Debug mode.
     ///
     /// [1]: https://developer.ridgerun.com/wiki/index.php/GStreamer_Daemon
+    #[must_use]
     pub fn debug(&self) -> resources::Debug {
         resources::Debug::new(self)
     }

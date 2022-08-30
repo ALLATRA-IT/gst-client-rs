@@ -1,9 +1,9 @@
 //! Define [`PipelineElement`] which encapsulate methods
-//! of [Elements Pipeline API][1]
+//! of [`Elements Pipeline API`][1]
 //!
-//! The actual element is [GStreamer] [GstElement][2] by itself
+//! The actual element is [`GStreamer`] [`GstElement`][2] by itself
 //!
-//! [GStreamer]: https://gstreamer.freedesktop.org/
+//! [`GStreamer`]: https://gstreamer.freedesktop.org/
 //! [1]: https://developer.ridgerun.com/wiki/index.php/GStreamer_Daemon_-_C_API#Elements
 //! [2]: https://gstreamer.freedesktop.org/documentation/additional/design/gstelement.html
 use crate::{gstd_types, resources::Pipeline, Error, GstClient};

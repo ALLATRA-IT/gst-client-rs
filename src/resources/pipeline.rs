@@ -1,9 +1,9 @@
 //! Define [`Pipeline`] which encapsulate methods
-//! of [Pipeline API][1]
+//! of [`Pipeline API`][1]
 //!
-//! The actual pipeline is [GStreamer] [GstPipeline][2]
+//! The actual pipeline is [`GStreamer`] [`GstPipeline`][2]
 //!
-//! [GStreamer]: https://gstreamer.freedesktop.org/
+//! [`GStreamer`]: https://gstreamer.freedesktop.org/
 //! [1]: https://developer.ridgerun.com/wiki/index.php/GStreamer_Daemon_-_C_API#Pipelines
 //! [2]: https://gstreamer.freedesktop.org/documentation/additional/design/gstpipeline.html
 use crate::{
@@ -95,19 +95,21 @@ impl Pipeline {
         self.client.process_resp(resp).await
     }
 
-    /// Operate with [GStreamer Daemon][1] pipeline element.
+    /// Operate with [`GStreamer Daemon`][1] pipeline element.
     ///
     /// # Arguments
     ///
     /// * `name` - name of the element in the pipeline
     ///
     /// [1]: https://developer.ridgerun.com/wiki/index.php/GStreamer_Daemon
+    #[must_use]
     pub fn element(&self, name: &str) -> PipelineElement {
         PipelineElement::new(name, self)
     }
-    /// Operate with [GStreamer Daemon][1] pipeline bus.
+    /// Operate with [`GStreamer Daemon`][1] pipeline bus.
     ///
     /// [1]: https://developer.ridgerun.com/wiki/index.php/GStreamer_Daemon
+    #[must_use]
     pub fn bus(&self) -> PipelineBus {
         PipelineBus::new(self)
     }
