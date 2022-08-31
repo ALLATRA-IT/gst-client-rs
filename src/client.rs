@@ -12,7 +12,7 @@ use url::Url;
 #[derive(Debug, Clone)]
 pub struct GstClient {
     http_client: Client,
-    base_url: Url,
+    pub(crate) base_url: Url,
 }
 
 impl GstClient {
@@ -121,14 +121,55 @@ impl Default for GstClient {
     }
 }
 
+impl From<Url> for GstClient {
+    fn from(url: Url) -> Self {
+        Self {
+            http_client: Client::new(),
+            base_url: url,
+        }
+    }
+}
+
+impl From<&Url> for GstClient {
+    fn from(url: &Url) -> Self {
+        Self {
+            http_client: Client::new(),
+            base_url: url.clone(),
+        }
+    }
+}
+
 #[cfg(test)]
 mod spec {
     use super::*;
     const BASE_URL: &'static str = "http://10.211.55.4:5000";
 
+    fn expect_url() -> Url {
+        Url::parse(BASE_URL).unwrap()
+    }
+
+    #[test]
+    fn create_client_with_build() {
+        let client = GstClient::build(BASE_URL).unwrap();
+        assert_eq!(client.base_url, expect_url());
+
+        let client = GstClient::build(BASE_URL.to_string()).unwrap();
+        assert_eq!(client.base_url, expect_url());
+    }
+
+    #[test]
+    fn create_client_from() {
+        let url = expect_url();
+        let client = GstClient::from(&url);
+        assert_eq!(client.base_url, expect_url());
+
+        let client = GstClient::from(url);
+        assert_eq!(client.base_url, expect_url());
+    }
+
     #[tokio::test]
     async fn retrieve_pipelines() {
-        if let Ok(client) = GstClient::build(&BASE_URL) {
+        if let Ok(client) = GstClient::build(BASE_URL) {
             let res = client.pipelines().await;
             println!("{:?}", res);
             assert!(res.is_ok());
@@ -137,7 +178,7 @@ mod spec {
 
     #[tokio::test]
     async fn retrieve_pipeline_graph() {
-        if let Ok(client) = GstClient::build(&BASE_URL) {
+        if let Ok(client) = GstClient::build(BASE_URL) {
             let res = client.pipeline("test-pipeline").graph().await;
             println!("{:?}", res);
             assert!(res.is_ok());
@@ -146,7 +187,7 @@ mod spec {
 
     #[tokio::test]
     async fn retrieve_pipeline_elements() {
-        if let Ok(client) = GstClient::build(&BASE_URL) {
+        if let Ok(client) = GstClient::build(BASE_URL) {
             let res = client.pipeline("test-pipeline").elements().await;
             println!("{:?}", res);
             assert!(res.is_ok());
@@ -154,7 +195,7 @@ mod spec {
     }
     #[tokio::test]
     async fn retrieve_pipeline_properties() {
-        if let Ok(client) = GstClient::build(&BASE_URL) {
+        if let Ok(client) = GstClient::build(BASE_URL) {
             let res = client.pipeline("test-pipeline").properties().await;
             println!("{:?}", res);
             assert!(res.is_ok());
@@ -162,7 +203,7 @@ mod spec {
     }
     #[tokio::test]
     async fn retrieve_pipeline_element_property() {
-        if let Ok(client) = GstClient::build(&BASE_URL) {
+        if let Ok(client) = GstClient::build(BASE_URL) {
             let res = client
                 .pipeline("test-pipeline")
                 .element("rtmp2src")
@@ -174,7 +215,7 @@ mod spec {
     }
     #[tokio::test]
     async fn retrieve_pipeline_bus_read() {
-        if let Ok(client) = GstClient::build(&BASE_URL) {
+        if let Ok(client) = GstClient::build(BASE_URL) {
             let res = client.pipeline("test-pipeline").bus().read().await;
             println!("{:?}", res);
             assert!(res.is_ok());
