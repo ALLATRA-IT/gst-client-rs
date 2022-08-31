@@ -1,7 +1,7 @@
 Gst Client
 ==========
 
-[![gst-client](https://img.shields.io/badge/v0.1.1-blue) v0.1.1](https://github.com/ALLATRA-IT/gst-client/tree/master) ([changelog](https://github.com/ALLATRA-IT/gst-client/blob/master/CHANGELOG.md))
+[![gst-client](https://img.shields.io/badge/v0.1.2-blue) v0.1.2](https://github.com/InnovateAndBuild/gst-client/tree/master) ([changelog](https://github.com/InnovateAndBuild/gst-client/blob/master/CHANGELOG.md))
 
 
 The [GStreamer Daemon][1] [Rust] Client or [gst-client][2] is a [Rust] package that provides bindings for the main functionalities of the [GStreamer Daemon]. 
