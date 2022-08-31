@@ -17,8 +17,9 @@ OS_NAME := $(shell uname -s)
 # Aliases #
 ###########
 
-fmt: cargo.fmt
+check: fmt lint doc
 
+fmt: cargo.fmt
 
 lint: cargo.lint
 
