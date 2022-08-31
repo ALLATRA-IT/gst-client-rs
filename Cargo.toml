@@ -1,6 +1,6 @@
 [package]
 name = "gst-client"
-version = "0.1.1"
+version = "0.1.2"
 description = "Provides bindings for the main functionalities of the GStreamer Daemon"
 authors = ["Serhii Khalymon <serhii.khalymon@pm.me>"]
 edition = "2021"
