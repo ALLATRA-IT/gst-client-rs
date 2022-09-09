@@ -250,7 +250,7 @@ impl Pipeline {
     pub async fn delete(&self) -> Result<gstd_types::Response, Error> {
         let resp = self
             .client
-            .delete(&format!("pipelines/{}", self.name))
+            .delete(&format!("pipelines?name={}", self.name))
             .await?;
         self.client.process_resp(resp).await
     }

@@ -56,7 +56,7 @@ impl GstClient {
 
     pub(crate) async fn delete(&self, url: &str) -> Result<Response, Error> {
         self.http_client
-            .put(self.base_url.join(url).map_err(Error::IncorrectApiUrl)?)
+            .delete(self.base_url.join(url).map_err(Error::IncorrectApiUrl)?)
             .send()
             .await
             .map_err(Error::RequestFailed)
