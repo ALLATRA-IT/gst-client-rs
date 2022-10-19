@@ -113,6 +113,7 @@ pub struct Property {
 pub enum PropertyValue {
     String(String),
     Integer(i32),
+    Bool(bool),
 }
 
 /// Possible result in [`Response::response`] after
