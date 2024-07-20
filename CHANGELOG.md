@@ -3,8 +3,10 @@ Gst Client changelog
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]: /../../tree/HEAD
+## [0.2.0] · 2024-07-20
+[0.2.0]: /../../tree/0.2.0
 
+[Diff](/../../compare/v0.1.2...0.2.0)
 
 ### 🚀 Features
 
@@ -28,7 +30,7 @@ All notable changes to this project will be documented in this file.
 - Run all check with `make check` & `make` commands ([f43338e])
 - Add test run ([e7660ec])
 - Improve version update in README ([c8db347])
-- Add auto changelog generation ([50f6e8a])
+- Add auto changelog generation ([6f71d58])
 
 
 
@@ -43,12 +45,12 @@ All notable changes to this project will be documented in this file.
 [6dd49e3]: /../../commit/6dd49e390ba2a0c990561c67e2604a49c8acaa1c
 [e7660ec]: /../../commit/e7660ec678951fb4901e57d6ef4f121c91b3929b
 [c8db347]: /../../commit/c8db347f470ed78e257da1e00271ab7e95b54527
-[50f6e8a]: /../../commit/50f6e8a348581fad502b5b8e1a80e57103f557d7
+[6f71d58]: /../../commit/6f71d58d875e7f5b41c6102093b26881cb5948c8
 
 
 
 
-## [0.1.2] · 2022-08-30
+## [0.1.2] · 2024-07-20
 [0.1.2]: /../../tree/v0.1.2
 
 [Diff](/../../compare/v0.1.1...v0.1.2)
