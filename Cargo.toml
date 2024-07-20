@@ -14,14 +14,10 @@ categories = ["web-programming::http-client"]
 
 [package.metadata.release]
 allow-branch = ["master"]
+pre-release-hook = ["git-cliff", "-o", "CHANGELOG.md", "--tag", "{{version}}"]
 pre-release-replacements = [
     {file="README.md", search="v[0-9]+\\.[0-9]+\\.[0-9]+", replace="v{{version}}"},
     {file="README.md", search="v[0-9]+\\.[0-9]+\\.[0-9]+\\]\\(https://github\\.com/InnovateAndBuild/gst-client/tree/master\\)", replace="v{{version}}](https://github.com/InnovateAndBuild/gst-client/tree/v{{version}})"},
-    {file="CHANGELOG.md", search="Unreleased", replace="{{version}}", min=1},
-    {file="CHANGELOG.md", search="...HEAD", replace="...{{tag_name}}", exactly=1},
-    {file="CHANGELOG.md", search="ReleaseDate", replace="{{date}}", min=1},
-    {file="CHANGELOG.md", search="<!-- next-header -->", replace="<!-- next-header -->\n## [Unreleased] - ReleaseDate\n", exactly=1},
-    {file="CHANGELOG.md", search="<!-- next-url -->", replace="<!-- next-url -->\n[Unreleased]: /../../tree/HEAD", exactly=1},
 ]
 
 [dependencies]
