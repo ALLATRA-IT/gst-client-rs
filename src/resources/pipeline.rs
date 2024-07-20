@@ -209,7 +209,7 @@ impl Pipeline {
             .await?;
         self.client.process_resp(resp).await
     }
-    /// Performs `PUT pipelines/{name}/state?name=stop`
+    /// Performs `PUT pipelines/{name}/state?name=null`
     /// API request, returning the parsed [`gstd_types::Response`]
     ///
     /// # Errors
@@ -219,7 +219,7 @@ impl Pipeline {
     pub async fn stop(&self) -> Result<gstd_types::Response, Error> {
         let resp = self
             .client
-            .put(&format!("pipelines/{}/state?name=stop", self.name))
+            .put(&format!("pipelines/{}/state?name=null", self.name))
             .await?;
         self.client.process_resp(resp).await
     }
