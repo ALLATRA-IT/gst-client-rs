@@ -11,17 +11,36 @@ use serde_repr::{Deserialize_repr, Serialize_repr};
 ///
 /// [1]: https://developer.ridgerun.com/wiki/index.php/GStreamer_Daemon
 #[derive(Clone, Debug, Deserialize, Serialize)]
-pub struct Response {
-    /// Status of response.
+#[serde(untagged)]
+pub enum ApiResponse {
+    Success(SuccessResponse),
+    Error(ErrorResponse),
+}
+
+/// Successful response by [`GStreamer Daemon`][1] API.
+///
+/// [1]: https://developer.ridgerun.com/wiki/index.php/GStreamer_Daemon
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct SuccessResponse {
     pub code: ResponseCode,
     /// Description of command response.
-    /// Same as [`Response::code`] but with text
+    /// Same as [`SuccessResponse::code`] but with text
     pub description: String,
     /// The actual response data from the server
     pub response: ResponseT,
 }
 
-/// Response Codes for [`Response`] of [`GStD`]
+/// Unsuccessful response by [`GStreamer Daemon`][1] API.
+///
+/// [1]: https://developer.ridgerun.com/wiki/index.php/GStreamer_Daemon
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct ErrorResponse {
+    pub code: ResponseCode,
+    pub description: String,
+    pub response: Option<()>,
+}
+
+/// Response Codes for [`SuccessResponse`] of [`GStD`]
 ///
 /// [`GStD`]: https://developer.ridgerun.com/wiki/index.php/GStreamer_Daemon
 #[derive(Serialize_repr, Deserialize_repr, PartialEq, Eq, Debug, Clone, Copy, Error, Display)]
@@ -71,6 +90,7 @@ pub enum ResponseCode {
 #[serde(untagged)]
 pub enum ResponseT {
     Bus(Option<Bus>),
+    PropertiesWithNodes(PropertiesWithNodes),
     Properties(Properties),
     Property(Property),
 }
@@ -82,12 +102,19 @@ pub struct Param {
     pub access: String,
 }
 
-/// Possible result in [`Response::response`] after
+/// Possible result in [`SuccessResponse::response`] after
 /// `GET /pipelines` API request
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct PropertiesWithNodes {
+    pub properties: Vec<Property>,
+    pub nodes: Vec<Node>,
+}
+
+/// Possible result in [`SuccessResponse::response`] after
+/// `GET /pipelines/{{pipeline_name}}/graph` API request
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Properties {
     pub properties: Vec<Property>,
-    pub nodes: Vec<Node>,
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -99,7 +126,7 @@ pub struct Node {
     pub name: String,
 }
 
-/// Possible result in [`Response::response`] after
+/// Possible result in [`SuccessResponse::response`] after
 /// `GET /pipelines/{pipeline_name}/graph` API request
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Property {
@@ -116,7 +143,7 @@ pub enum PropertyValue {
     Bool(bool),
 }
 
-/// Possible result in [`Response::response`] after
+/// Possible result in [`SuccessResponse::response`] after
 /// `GET /pipelines/{name}/bus/message` API request
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Bus {

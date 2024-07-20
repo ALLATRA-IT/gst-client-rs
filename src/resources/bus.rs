@@ -23,13 +23,13 @@ impl PipelineBus {
         }
     }
     /// Performs `GET pipelines/{name}/bus/message`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
     /// If API request cannot be performed, or fails.
     /// See [`Error`] for details.
-    pub async fn read(&self) -> Result<gstd_types::Response, Error> {
+    pub async fn read(&self) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .get(&format!("pipelines/{}/bus/message", self.pipeline.name))
@@ -37,13 +37,13 @@ impl PipelineBus {
         self.client.process_resp(resp).await
     }
     /// Performs `PUT pipelines/{name}?timeout={time_ns}`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
     /// If API request cannot be performed, or fails.
     /// See [`Error`] for details.
-    pub async fn set_timeout(&self, time_ns: i32) -> Result<gstd_types::Response, Error> {
+    pub async fn set_timeout(&self, time_ns: i32) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .put(&format!(
@@ -54,13 +54,13 @@ impl PipelineBus {
         self.client.process_resp(resp).await
     }
     /// Performs `PUT pipelines/{name}?types={filter}`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
     /// If API request cannot be performed, or fails.
     /// See [`Error`] for details.
-    pub async fn set_filter(&self, filter: &str) -> Result<gstd_types::Response, Error> {
+    pub async fn set_filter(&self, filter: &str) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .put(&format!(

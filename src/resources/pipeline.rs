@@ -31,7 +31,7 @@ impl Pipeline {
     /// Creates a new pipeline .
     ///
     /// Performs `POST pipelines?name={name}&description={description}`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Arguments
     ///
@@ -44,7 +44,7 @@ impl Pipeline {
     pub async fn create<S: Into<String>>(
         &self,
         description: S,
-    ) -> Result<gstd_types::Response, Error> {
+    ) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .post(&format!(
@@ -57,13 +57,13 @@ impl Pipeline {
     }
 
     /// Performs `GET /pipelines/{name}/graph` API request, returning the
-    /// parsed [`gstd_types::Response`]
+    /// parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
     /// If API request cannot be performed, or fails.
     /// See [`Error`] for details.
-    pub async fn graph(&self) -> Result<gstd_types::Response, Error> {
+    pub async fn graph(&self) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .get(&format!("pipelines/{}/graph", self.name))
@@ -71,13 +71,13 @@ impl Pipeline {
         self.client.process_resp(resp).await
     }
     /// Performs `GET /pipelines/{name}/elements`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
     /// If API request cannot be performed, or fails.
     /// See [`Error`] for details.
-    pub async fn elements(&self) -> Result<gstd_types::Response, Error> {
+    pub async fn elements(&self) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .get(&format!("pipelines/{}/elements", self.name))
@@ -86,13 +86,13 @@ impl Pipeline {
     }
 
     /// Performs `GET /pipelines/{name}/properties`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
     /// If API request cannot be performed, or fails.
     /// See [`Error`] for details.
-    pub async fn properties(&self) -> Result<gstd_types::Response, Error> {
+    pub async fn properties(&self) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .get(&format!("pipelines/{}/properties", self.name))
@@ -120,7 +120,7 @@ impl Pipeline {
     }
 
     /// Performs `POST pipelines/{name}/event?name={event_name}`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
@@ -129,7 +129,7 @@ impl Pipeline {
     pub async fn emit_event<S: Into<String> + Display>(
         &self,
         name: S,
-    ) -> Result<gstd_types::Response, Error> {
+    ) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .post(&format!("pipelines/{}/event?name={name}", self.name))
@@ -138,13 +138,13 @@ impl Pipeline {
     }
 
     /// Performs `POST pipelines/{name}/event?name=eos`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
     /// If API request cannot be performed, or fails.
     /// See [`Error`] for details.
-    pub async fn emit_event_eos(&self) -> Result<gstd_types::Response, Error> {
+    pub async fn emit_event_eos(&self) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .post(&format!("pipelines/{}/event?name=eos", self.name))
@@ -153,13 +153,13 @@ impl Pipeline {
     }
 
     /// Performs `POST pipelines/{name}/event?name=flush_start`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
     /// If API request cannot be performed, or fails.
     /// See [`Error`] for details.
-    pub async fn emit_event_flush_start(&self) -> Result<gstd_types::Response, Error> {
+    pub async fn emit_event_flush_start(&self) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .post(&format!("pipelines/{}/event?name=flush_start", self.name))
@@ -168,13 +168,13 @@ impl Pipeline {
     }
 
     /// Performs `POST pipelines/{name}/event?name=flush_stop`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
     /// If API request cannot be performed, or fails.
     /// See [`Error`] for details.
-    pub async fn emit_event_flush_stop(&self) -> Result<gstd_types::Response, Error> {
+    pub async fn emit_event_flush_stop(&self) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .post(&format!("pipelines/{}/event?name=flush_stop", self.name))
@@ -182,13 +182,13 @@ impl Pipeline {
         self.client.process_resp(resp).await
     }
     /// Performs `PUT pipelines/{name}/state?name=playing`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
     /// If API request cannot be performed, or fails.
     /// See [`Error`] for details.
-    pub async fn play(&self) -> Result<gstd_types::Response, Error> {
+    pub async fn play(&self) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .put(&format!("pipelines/{}/state?name=playing", self.name))
@@ -196,13 +196,13 @@ impl Pipeline {
         self.client.process_resp(resp).await
     }
     /// Performs `PUT pipelines/{name}/state?name=paused`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
     /// If API request cannot be performed, or fails.
     /// See [`Error`] for details.
-    pub async fn pause(&self) -> Result<gstd_types::Response, Error> {
+    pub async fn pause(&self) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .put(&format!("pipelines/{}/state?name=paused", self.name))
@@ -210,13 +210,13 @@ impl Pipeline {
         self.client.process_resp(resp).await
     }
     /// Performs `PUT pipelines/{name}/state?name=null`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
     /// If API request cannot be performed, or fails.
     /// See [`Error`] for details.
-    pub async fn stop(&self) -> Result<gstd_types::Response, Error> {
+    pub async fn stop(&self) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .put(&format!("pipelines/{}/state?name=null", self.name))
@@ -225,13 +225,13 @@ impl Pipeline {
     }
 
     /// Performs `PUT pipelines/{name}/verbose?name={value}`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
     /// If API request cannot be performed, or fails.
     /// See [`Error`] for details.
-    pub async fn set_verbose(&self, value: bool) -> Result<gstd_types::Response, Error> {
+    pub async fn set_verbose(&self, value: bool) -> Result<gstd_types::SuccessResponse, Error> {
         let val = if value { "true" } else { "false" };
         let resp = self
             .client
@@ -241,13 +241,13 @@ impl Pipeline {
     }
 
     /// Performs `DELETE pipelines/{name}/`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
     /// If API request cannot be performed, or fails.
     /// See [`Error`] for details.
-    pub async fn delete(&self) -> Result<gstd_types::Response, Error> {
+    pub async fn delete(&self) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .delete(&format!("pipelines?name={}", self.name))

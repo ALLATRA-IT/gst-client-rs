@@ -28,13 +28,13 @@ impl PipelineElement {
 
     /// Performs `GET pipelines/{name}/elements/
     /// {element}/properties/{property}`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
     /// If API request cannot be performed, or fails.
     /// See [`Error`] for details.
-    pub async fn property(&self, property: &str) -> Result<gstd_types::Response, Error> {
+    pub async fn property(&self, property: &str) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .get(&format!(
@@ -46,7 +46,7 @@ impl PipelineElement {
     }
     /// Performs `PUT pipelines/{name}/elements/
     /// {element}/properties/{property}?name={value}`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
@@ -56,7 +56,7 @@ impl PipelineElement {
         &self,
         property: &str,
         value: &str,
-    ) -> Result<gstd_types::Response, Error> {
+    ) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .put(&format!(
@@ -70,13 +70,13 @@ impl PipelineElement {
 
     /// Performs `GET pipelines/{name}/
     /// elements/{element}/signals/{signal}/callback`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
     /// If API request cannot be performed, or fails.
     /// See [`Error`] for details.
-    pub async fn signal_connect(&self, signal: &str) -> Result<gstd_types::Response, Error> {
+    pub async fn signal_connect(&self, signal: &str) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .get(&format!(
@@ -90,13 +90,16 @@ impl PipelineElement {
 
     /// Performs `GET pipelines/{name}/
     /// elements/{element}/signals/{signal}/disconnect`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
     /// If API request cannot be performed, or fails.
     /// See [`Error`] for details.
-    pub async fn signal_disconnect(&self, signal: &str) -> Result<gstd_types::Response, Error> {
+    pub async fn signal_disconnect(
+        &self,
+        signal: &str,
+    ) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .get(&format!(
@@ -109,7 +112,7 @@ impl PipelineElement {
     }
     /// Performs `PUT pipelines/{name}/
     /// elements/{element}/signals/{signal}/timeout?name={timeout}`
-    /// API request, returning the parsed [`gstd_types::Response`]
+    /// API request, returning the parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Arguments
     ///
@@ -123,7 +126,7 @@ impl PipelineElement {
         &self,
         signal: &str,
         timeout: &str,
-    ) -> Result<gstd_types::Response, Error> {
+    ) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self
             .client
             .put(&format!(

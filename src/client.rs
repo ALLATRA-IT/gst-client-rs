@@ -62,30 +62,30 @@ impl GstClient {
             .map_err(Error::RequestFailed)
     }
 
-    pub(crate) async fn process_resp(&self, resp: Response) -> Result<gstd_types::Response, Error> {
-        if !resp.status().is_success() {
-            return Err(Error::BadStatus(resp.status()));
-        }
-
-        let res = resp
-            .json::<gstd_types::Response>()
+    pub(crate) async fn process_resp(
+        &self,
+        resp: Response,
+    ) -> Result<gstd_types::SuccessResponse, Error> {
+        let api_response = resp
+            .json::<gstd_types::ApiResponse>()
             .await
-            .map_err(Error::BadBody)?;
-
-        if res.code != gstd_types::ResponseCode::Success {
-            return Err(Error::GstdError(res.code));
+            .map_err(Error::RequestFailed)?;
+        match api_response {
+            gstd_types::ApiResponse::Success(resp) => Ok(resp),
+            gstd_types::ApiResponse::Error(resp) => {
+                Err(Error::GstdError(resp.code, resp.description))
+            }
         }
-        Ok(res)
     }
 
     /// Performs `GET /pipelines` API request, returning the
-    /// parsed [`gstd_types::Response`]
+    /// parsed [`gstd_types::SuccessResponse`]
     ///
     /// # Errors
     ///
     /// If API request cannot be performed, or fails.
     /// See [`Error`] for details.
-    pub async fn pipelines(&self) -> Result<gstd_types::Response, Error> {
+    pub async fn pipelines(&self) -> Result<gstd_types::SuccessResponse, Error> {
         let resp = self.get("pipelines").await?;
         self.process_resp(resp).await
     }
@@ -142,7 +142,7 @@ impl From<&Url> for GstClient {
 #[cfg(test)]
 mod spec {
     use super::*;
-    const BASE_URL: &'static str = "http://10.211.55.4:5000";
+    const BASE_URL: &'static str = "http://localhost:8080";
     const PIPELINE_NAME: &'static str = "test pipeline";
 
     fn expect_url() -> Url {
@@ -167,7 +167,6 @@ mod spec {
         let client = GstClient::from(url);
         assert_eq!(client.base_url, expect_url());
     }
-
     #[tokio::test]
     async fn create_pipeline() {
         if let Ok(client) = GstClient::build(BASE_URL) {
@@ -176,6 +175,7 @@ mod spec {
             assert!(res.is_ok());
         };
     }
+
     #[tokio::test]
     async fn retrieve_pipelines() {
         if let Ok(client) = GstClient::build(BASE_URL) {
@@ -226,6 +226,14 @@ mod spec {
     async fn retrieve_pipeline_bus_read() {
         if let Ok(client) = GstClient::build(BASE_URL) {
             let res = client.pipeline(PIPELINE_NAME).bus().read().await;
+            println!("{:?}", res);
+            assert!(res.is_ok());
+        };
+    }
+    #[tokio::test]
+    async fn delete_pipeline() {
+        if let Ok(client) = GstClient::build(BASE_URL) {
+            let res = client.pipeline(PIPELINE_NAME).delete().await;
             println!("{:?}", res);
             assert!(res.is_ok());
         };

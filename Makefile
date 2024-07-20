@@ -25,6 +25,8 @@ lint: cargo.lint
 
 doc: cargo.doc
 
+test: cargo.test
+
 
 ##################
 # Cargo commands #
@@ -57,10 +59,18 @@ cargo.lint:
 cargo.doc:
 	cargo doc --all-features
 
+# Run tests
+#
+# Usage:
+#	make cargo.test
+
+cargo.test:
+	cargo nextest run
+
 
 ##################
 # .PHONY section #
 ##################
 
-.PHONY: fmt lint \
-        cargo.fmt cargo.lint
+.PHONY: fmt lint test\
+        cargo.fmt cargo.lint cargo.test
