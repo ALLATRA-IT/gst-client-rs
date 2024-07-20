@@ -17,16 +17,12 @@ allow-branch = ["master"]
 pre-release-hook = ["git-cliff", "-o", "CHANGELOG.md", "--tag", "{{version}}"]
 pre-release-replacements = [
     {file="README.md", search="v[0-9]+\\.[0-9]+\\.[0-9]+", replace="v{{version}}"},
-    {file="README.md", search="v[0-9]+\\.[0-9]+\\.[0-9]+\\]\\(https://github\\.com/InnovateAndBuild/gst-client/tree/master\\)", replace="v{{version}}](https://github.com/InnovateAndBuild/gst-client/tree/v{{version}})"},
 ]
 
 [dependencies]
-mime = "0.3"
-mime_serde_shim = "0.2"
 serde = { version = "1.0", features = ["derive"] }
 serde_repr = "0.1"
 url = { version = "2.1", features = ["serde"] }
-serde_json = "1.0"
 [dependencies.derive_more]
 version = "0.99"
 features = ["display", "error", "from"]
