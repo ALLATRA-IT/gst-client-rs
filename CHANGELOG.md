@@ -3,10 +3,26 @@ Gst Client changelog
 
 All notable changes to this project will be documented in this file.
 
-## [0.2.0] · 2024-07-20
-[0.2.0]: /../../tree/0.2.0
+## [0.2.1] · 2024-07-20
+[0.2.1]: /../../tree/0.2.1
 
-[Diff](/../../compare/v0.1.2...0.2.0)
+[Diff](/../../compare/v0.2.0...0.2.1)
+
+### ⚙️ Miscellaneous Tasks
+
+- Remove unused dependencies ([f282ef9])
+
+
+
+[f282ef9]: /../../commit/f282ef9bedc8de4ecd4c5df862877f95d9df3f5b
+
+
+
+
+## [0.2.0] · 2024-07-20
+[0.2.0]: /../../tree/v0.2.0
+
+[Diff](/../../compare/v0.1.2...v0.2.0)
 
 ### 🚀 Features
 
@@ -31,6 +47,7 @@ All notable changes to this project will be documented in this file.
 - Add test run ([e7660ec])
 - Improve version update in README ([c8db347])
 - Add auto changelog generation ([6f71d58])
+- Release gst-client version 0.2.0 ([7402285])
 
 
 
@@ -46,6 +63,7 @@ All notable changes to this project will be documented in this file.
 [e7660ec]: /../../commit/e7660ec678951fb4901e57d6ef4f121c91b3929b
 [c8db347]: /../../commit/c8db347f470ed78e257da1e00271ab7e95b54527
 [6f71d58]: /../../commit/6f71d58d875e7f5b41c6102093b26881cb5948c8
+[7402285]: /../../commit/74022852654af5eb46f842178b85a90945fadafb
 
 
 
