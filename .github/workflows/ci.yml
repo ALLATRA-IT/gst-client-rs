@@ -65,3 +65,34 @@ jobs:
         if: ${{ !contains(github.event.head_commit.message, '[fresh ci]') }}
 
       - run: make doc
+
+  ########
+  # Test #
+  ########
+
+  test:
+    if: ${{ github.ref == 'refs/heads/master'
+            || startsWith(github.ref, 'refs/tags/')
+            || !contains(github.event.head_commit.message, '[skip ci]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+
+      - uses: Swatinem/rust-cache@v2
+        if: ${{ !contains(github.event.head_commit.message, '[fresh ci]') }}
+
+      - name: Install cargo-nextest
+        uses: taiki-e/install-action@nextest
+
+      - name: Start Docker container
+        run: |
+          docker run -d -p 8080:8080 edalferes/gstd-runner
+          # Wait for the container to be ready
+          sleep 10
+
+      - name: Run tests
+        run: make test
