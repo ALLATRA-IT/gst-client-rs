@@ -2,11 +2,11 @@
 name = "gst-client"
 version = "0.2.1"
 description = "Provides bindings for the main functionalities of the GStreamer Daemon"
-authors = ["Serhii Khalymon <serhii.khalymon@pm.me>"]
+authors = ["Serhii Khalymon <serhii@fluxomnia.systems>"]
 edition = "2021"
 readme = "README.md"
-license-file = "LICENSE.md"
-repository = "https://github.com/InnovateAndBuild/gst-client"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/fluxomnia-systems/gst-client"
 documentation = "https://docs.rs/gst-client"
 keywords = ["gstreamer", "gstd", "API", "client"]
 categories = ["web-programming::http-client"]
